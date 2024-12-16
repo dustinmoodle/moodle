@@ -141,7 +141,9 @@ class tag_condition extends condition {
     }
 
     public function get_initial_values() {
-        $tags = \core_tag_tag::get_tags_by_area_in_contexts('core_question', 'question', $this->contexts);
+        $contexts = $this->contexts;
+        $contexts[] = \context_system::instance();
+        $tags = \core_tag_tag::get_tags_by_area_in_contexts('core_question', 'question', $contexts);
         $values = [];
         foreach ($tags as $tag) {
             $values[] = [
